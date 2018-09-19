@@ -12,7 +12,6 @@
     <version>1.0</version>
 
 
-
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -70,7 +69,37 @@
                     </archive>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.14</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.2.1</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                        <configuration>
+                            <includeDependency>true</includeDependency>
+                            <obfuscate>true</obfuscate>
+                            <injar>${project.build.finalName}-jar-with-dependencies.jar</injar>
+                            <outjar>jar-with-obfuscation.jar</outjar>
+                            <options>
+                                <option>-keep public class ru.otus.MainHW101 {public static void main(java.lang.String[]);}</option>
+                                <option>-dontwarn</option>
+                            </options>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

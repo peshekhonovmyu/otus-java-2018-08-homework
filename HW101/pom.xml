@@ -20,6 +20,7 @@
         </dependency>
     </dependencies>
 
+
     <build>
         <plugins>
 
@@ -39,7 +40,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>MainHW101</mainClass>
+                            <mainClass>ru.otus.MainHW101</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -73,34 +74,39 @@
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
                 <version>2.0.14</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.proguard</groupId>
-                        <artifactId>proguard-base</artifactId>
-                        <version>5.2.1</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>proguard</goal>
                         </goals>
-                        <configuration>
-                            <includeDependency>true</includeDependency>
-                            <obfuscate>true</obfuscate>
-                            <injar>${project.build.finalName}-jar-with-dependencies.jar</injar>
-                            <outjar>jar-with-obfuscation.jar</outjar>
-                            <options>
-                                <option>-keep public class ru.otus.MainHW101 {public static void main(java.lang.String[]);}</option>
-                                <option>-dontwarn</option>
-                            </options>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <includeDependency>true</includeDependency>
+                    <obfuscate>true</obfuscate>
+                    <injar>${project.build.finalName}-jar-with-dependencies.jar</injar>
+                    <outjar>jar-with-obfuscation.jar</outjar>
+                    <options>
+                        <option>-keep public class ru.otus.MainHW101 {public static void main(java.lang.String[]);}
+                        </option>
+                        <option>-dontwarn</option>
+                    </options>
+                    <libs>
+                        <lib>C:/Program Files/Java/jre1.8.0_181/lib/rt.jar</lib>
+                    </libs>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>6.0.3</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
